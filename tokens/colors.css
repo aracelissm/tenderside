@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NexaMe — Color System
+   "A sophisticated palette that reflects depth, clarity, and human
+   connection." Usage balance: 60% Near Black · 25% Warm Ivory ·
+   10% Antique Gold · 5% Cosmic Green.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Primary palette ─────────────────────────────────────────── */
+  --near-black:   #0B0B0C;   /* Foundation — depth, sophistication, focus */
+  --antique-gold: #B08D3E;   /* Signature — wisdom, quality, human value  */
+  --warm-ivory:   #F5F1E8;   /* Neutral   — clarity, openness             */
+  --cosmic-green: #1A5C4E;   /* Accent    — growth, emotional intelligence */
+
+  /* ── Neutral scale (dark → light) ────────────────────────────── */
+  --neutral-950: #0B0B0C;
+  --neutral-900: #111113;
+  --neutral-800: #1E1E20;
+  --neutral-700: #2D2D30;
+  --neutral-600: #3F3F44;
+  --neutral-400: #6A6A9F;   /* cool slate — muted UI text on dark */
+  --neutral-200: #DADADF;
+
+  /* ── Gold ramp (derived around the signature) ────────────────── */
+  --gold-100: #EAD9A8;
+  --gold-300: #D4B36A;
+  --gold-500: #B08D3E;      /* = --antique-gold */
+  --gold-700: #8A6B2A;
+  --gold-900: #5C4718;
+
+  /* ── Ivory ramp ──────────────────────────────────────────────── */
+  --ivory-050: #FBF9F3;
+  --ivory-100: #F5F1E8;     /* = --warm-ivory */
+  --ivory-200: #E8E1D2;
+  --ivory-300: #D6CCB6;
+
+  /* ── Accent palette (categorical) ────────────────────────────── */
+  --accent-green:     #1A5C4E;
+  --accent-teal:      #2F7A68;
+  --accent-blue:      #2E5B7D;
+  --accent-violet:    #6A4C8A;
+  --accent-terracotta:#B86A3C;
+  --accent-blush:     #CFA8A0;
+
+  /* ── Semantic — surfaces (dark, default theme) ───────────────── */
+  --bg-page:        var(--near-black);
+  --surface-1:      #111113;   /* raised panel   */
+  --surface-2:      #1A1A1D;   /* card           */
+  --surface-3:      #232327;   /* nested / hover */
+  --surface-ivory:  var(--warm-ivory);  /* manual / document pages */
+
+  /* ── Semantic — text ─────────────────────────────────────────── */
+  --text-primary:   #F5F1E8;
+  --text-secondary: #B7B4AC;
+  --text-tertiary:  #6A6A9F;
+  --text-on-gold:   #0B0B0C;
+  --text-on-ivory:  #0B0B0C;
+  --text-inverse:   #0B0B0C;
+
+  /* ── Semantic — brand & interactive ──────────────────────────── */
+  --brand-gold:     var(--antique-gold);
+  --brand-green:    var(--cosmic-green);
+  --link:           var(--gold-300);
+  --link-hover:     var(--gold-100);
+
+  /* ── Semantic — borders & dividers ───────────────────────────── */
+  --border-subtle:  rgba(176, 141, 62, 0.18);  /* hairline gold on dark */
+  --border-default: rgba(245, 241, 232, 0.10);
+  --border-strong:  rgba(176, 141, 62, 0.45);
+  --divider:        rgba(245, 241, 232, 0.08);
+
+  /* ── Semantic — status ───────────────────────────────────────── */
+  --status-positive:      #2F7A68;   /* what works / growth / success */
+  --status-positive-bg:   rgba(47, 122, 104, 0.14);
+  --status-attention:     #B08D3E;   /* important to know */
+  --status-attention-bg:  rgba(176, 141, 62, 0.14);
+  --status-caution:       #B86A3C;   /* be mindful / trigger */
+  --status-caution-bg:    rgba(184, 106, 60, 0.14);
+  --status-info:          #2E5B7D;
+  --status-info-bg:       rgba(46, 91, 125, 0.14);
+}

@@ -1,0 +1,14 @@
+/* ── NexaMe Webfonts ───────────────────────────────────────────────
+   The NexaMe brand uses three commercial typefaces that are NOT shipped
+   in the source repo:
+     • Canela      (Commercial Type)  — display / headlines
+     • Söhne       (Klim Type Foundry) — body / UI
+     • Söhne Mono  (Klim Type Foundry) — data / captions
+   Until licensed font files are supplied, the closest free Google Fonts
+   are substituted (flagged in README.md → Typography):
+     • Canela      → Cormorant Garamond  (elegant high-contrast serif)
+     • Söhne       → Hanken Grotesk       (neutral neo-grotesque)
+     • Söhne Mono  → IBM Plex Mono        (clean grotesque monospace)
+   Swap these @import URLs for real @font-face rules when files arrive. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
