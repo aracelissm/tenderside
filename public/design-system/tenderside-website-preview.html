@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tenderside — The Human Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root{
+    --near-black:#0B0B0D;--antique-gold:#D4AF37;--warm-ivory:#F1E4C6;--cosmic-green:#2F7A68;
+    --gold-100:#F1E4C6;--gold-300:#E7C97A;--gold-500:#D4AF37;--gold-700:#A8842A;
+    --surface-1:#141414;--surface-2:#1C1C1E;--surface-3:#262626;--surface-ivory:#F1E4C6;
+    --text-primary:#F1E4C6;--text-secondary:#B7B4AC;--text-tertiary:#8C8577;--text-on-gold:#0B0B0D;
+    --brand-gold:#D4AF37;--link:#E7C97A;--link-hover:#F1E4C6;
+    --border-subtle:rgba(212,175,55,.18);--border-default:rgba(245,241,232,.10);--border-strong:rgba(212,175,55,.45);--divider:rgba(245,241,232,.08);
+    --status-positive:#3E9E86;--accent-teal:#3E9E86;
+    --font-display:'Cormorant Garamond',Georgia,serif;--font-body:'Montserrat',-apple-system,sans-serif;--font-mono:'IBM Plex Mono',ui-monospace,monospace;
+    --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-pill:999px;
+    --control-h-sm:36px;--control-h-md:44px;--control-h-lg:52px;
+    --shadow-lg:0 18px 48px rgba(0,0,0,.55);--shadow-ivory:0 12px 40px rgba(11,11,13,.12);
+    --glow-gold-sm:0 0 16px rgba(212,175,55,.25);--glow-gold:0 0 40px rgba(212,175,55,.28);
+    --gradient-gold:linear-gradient(135deg,#F1E4C6 0%,#D4AF37 45%,#A8842A 100%);
+    --gradient-gold-radial:radial-gradient(120% 120% at 50% 0%,rgba(212,175,55,.35) 0%,rgba(212,175,55,0) 60%);
+    --gradient-green:linear-gradient(135deg,#3E9E86 0%,#2F7A68 100%);
+    --gradient-ink:linear-gradient(180deg,#1C1C1E 0%,#0B0B0D 100%);
+    --ease-standard:cubic-bezier(.4,0,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+    --dur-fast:140ms;--dur-base:240ms;--dur-slow:420ms;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--near-black);}
+  body{color:var(--text-primary);font-family:var(--font-body);-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;margin:0;}
+  a{color:var(--link);text-decoration:none;transition:color var(--dur-base) var(--ease-standard);}
+  a:hover{color:var(--link-hover);}
+  img{display:block;max-width:100%;}
+  ::selection{background:rgba(212,175,55,.3);color:var(--warm-ivory);}
+  .container{max-width:1200px;margin:0 auto;padding:0 32px;}
+  .nx-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brand-gold);font-weight:500;}
+  .nx-caption{font-family:var(--font-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-tertiary);}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+  .reveal.vis{opacity:1;transform:none;}
+  @keyframes nx-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+  @keyframes nx-pulse-glow{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.85;transform:scale(1.06);}}
+  @keyframes nx-fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;}*{animation:none!important;}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+function LucideIcon({ name, size=20, stroke=1.75, color='currentColor', style }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current && window.lucide) {
+      ref.current.innerHTML = `<i data-lucide="${name}"></i>`;
+      window.lucide.createIcons({ attrs:{ width:size, height:size, 'stroke-width':stroke, stroke:color }, nameAttr:'data-lucide' });
+    }
+  }, [name, size, stroke, color]);
+  return <span ref={ref} style={{ display:'inline-flex', width:size, height:size, color, ...style }} />;
+}
+const BRAND = { communication:'message-circle', relationships:'users', 'blind-spots':'eye-off', manual:'book', share:'share-2', privacy:'lock', growth:'trending-up', insights:'sparkles' };
+const Icon = ({ name, ...p }) => <LucideIcon name={BRAND[name] || name} {...p} />;
+
+function Button({ children, variant='primary', size='md', icon, iconRight, fullWidth, style={}, ...rest }) {
+  const [h, setH] = useState(false); const [a, setA] = useState(false);
+  const H = { sm:'var(--control-h-sm)', md:'var(--control-h-md)', lg:'var(--control-h-lg)' };
+  const P = { sm:'0 16px', md:'0 22px', lg:'0 30px' }; const F = { sm:14, md:16, lg:18 };
+  const base = { display:'inline-flex', alignItems:'center', justifyContent:'center', gap:10, height:H[size], padding:P[size], width:fullWidth?'100%':'auto', fontFamily:'var(--font-body)', fontSize:F[size], fontWeight:500, letterSpacing:'.01em', borderRadius:'var(--radius-sm)', border:'1px solid transparent', cursor:'pointer', whiteSpace:'nowrap', transition:'all var(--dur-base) var(--ease-standard)' };
+  const V = { primary:{ background:'var(--gradient-gold)', color:'var(--text-on-gold)', boxShadow:'var(--glow-gold-sm)' }, secondary:{ background:'transparent', color:'var(--text-primary)', borderColor:'var(--border-strong)' } };
+  const hv = h ? (variant==='primary' ? { boxShadow:'var(--glow-gold)', filter:'brightness(1.06)' } : { borderColor:'var(--brand-gold)', color:'var(--brand-gold)' }) : {};
+  const av = a ? { transform:'translateY(1px) scale(.99)' } : {};
+  return <button onMouseEnter={()=>setH(true)} onMouseLeave={()=>{setH(false);setA(false);}} onMouseDown={()=>setA(true)} onMouseUp={()=>setA(false)} style={{...base,...V[variant],...hv,...av,...style}} {...rest}>{icon}{children}{iconRight}</button>;
+}
+
+function Card({ children, variant='default', padding=24, interactive, glow, style={} }) {
+  const [h, setH] = useState(false);
+  const V = { default:{ background:'var(--surface-2)', border:'1px solid var(--border-default)' }, gold:{ background:'var(--surface-2)', border:'1px solid var(--border-strong)', boxShadow:'var(--glow-gold-sm)' }, ink:{ background:'var(--gradient-ink)', border:'1px solid var(--border-subtle)' } };
+  return <div onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ borderRadius:'var(--radius-lg)', padding, transition:'all var(--dur-base) var(--ease-standard)', cursor:interactive?'pointer':'default', ...V[variant], ...(glow?{boxShadow:'var(--glow-gold)'}:{}) , ...(interactive&&h?{transform:'translateY(-3px)',borderColor:'var(--border-strong)',boxShadow:'var(--glow-gold-sm)'}:{}), ...style }}>{children}</div>;
+}
+
+function Avatar({ name='', size=48 }) {
+  return <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', width:size, height:size, borderRadius:'50%', flexShrink:0, background:'var(--gradient-gold)', padding:2 }}>
+    <span style={{ width:'100%', height:'100%', borderRadius:'50%', display:'inline-flex', alignItems:'center', justifyContent:'center', background:'var(--gradient-ink)', fontFamily:'var(--font-display)', fontSize:size*.42, color:'var(--brand-gold)' }}>{name.charAt(0).toUpperCase()||'N'}</span>
+  </span>;
+}
+
+function ProgressBar({ value=0, label, showValue=true, tone='gold' }) {
+  const fill = tone==='green' ? 'var(--gradient-green)' : 'var(--gradient-gold)';
+  return <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+    {(label||showValue) && <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline' }}>{label&&<span style={{ fontSize:14, color:'var(--text-secondary)' }}>{label}</span>}{showValue&&<span style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'var(--brand-gold)' }}>{value}%</span>}</div>}
+    <div style={{ height:8, borderRadius:'var(--radius-pill)', background:'var(--surface-3)', overflow:'hidden' }}><div style={{ width:value+'%', height:'100%', borderRadius:'var(--radius-pill)', background:fill }} /></div>
+  </div>;
+}
+
+function ProgressRing({ value=0, size=150, stroke=8, sublabel }) {
+  const r=(size-stroke)/2, c=2*Math.PI*r, off=c*(1-value/100);
+  return <div style={{ position:'relative', width:size, height:size }}>
+    <svg width={size} height={size} style={{ transform:'rotate(-90deg)' }}>
+      <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#F1E4C6"/><stop offset="55%" stopColor="#D4AF37"/><stop offset="100%" stopColor="#A8842A"/></linearGradient></defs>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="var(--surface-3)" strokeWidth={stroke}/>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="url(#rg)" strokeWidth={stroke} strokeLinecap="round" strokeDasharray={c} strokeDashoffset={off}/>
+    </svg>
+    <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+      <span style={{ fontFamily:'var(--font-display)', fontSize:size*.28, color:'var(--text-primary)' }}>{value}%</span>
+      {sublabel&&<span style={{ fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'.05em', textTransform:'uppercase', color:'var(--text-tertiary)', marginTop:4 }}>{sublabel}</span>}
+    </div>
+  </div>;
+}
+
+function Reveal({ children, delay=0, style={} }) {
+  const ref = useRef(null); const [v, setV] = useState(false);
+  useEffect(() => {
+    const el=ref.current; if(!el) return;
+    const o=new IntersectionObserver(([e])=>{ if(e.isIntersecting){ setV(true); o.unobserve(el); } }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
+    o.observe(el); return ()=>o.disconnect();
+  }, []);
+  return <div ref={ref} className={'reveal'+(v?' vis':'')} style={{ transitionDelay:delay+'ms', ...style }}>{children}</div>;
+}
+
+/* ── Sections ── */
+const LINKS=['Home','How It Works','The Manual','For Relationships','Pricing','About'];
+function Nav(){
+  const [active,setActive]=useState('Home'); const [sc,setSc]=useState(false);
+  useEffect(()=>{ const f=()=>setSc(window.scrollY>12); f(); window.addEventListener('scroll',f,{passive:true}); return ()=>window.removeEventListener('scroll',f); },[]);
+  return <header style={{ position:'sticky', top:0, zIndex:50, background:sc?'rgba(11,11,13,.86)':'rgba(11,11,13,.4)', backdropFilter:'blur(14px)', borderBottom:'1px solid '+(sc?'var(--border-subtle)':'transparent'), transition:'all var(--dur-base) var(--ease-standard)' }}>
+    <div className="container" style={{ height:76, display:'flex', alignItems:'center', gap:40 }}>
+      <a href="#" style={{ display:'flex', alignItems:'center', gap:12 }}><img src="assets/logos/tenderside-icon.png" alt="Tenderside" width="34" height="34" style={{ borderRadius:8, objectFit:'cover' }}/><span style={{ fontFamily:'var(--font-display)', fontSize:24, letterSpacing:'.14em', color:'var(--text-primary)' }}>TENDERSIDE</span></a>
+      <nav style={{ display:'flex', gap:28, marginLeft:8, flex:1 }}>{LINKS.map(l=><a key={l} href="#" onClick={e=>{e.preventDefault();setActive(l);}} style={{ fontSize:14, paddingBottom:4, color:active===l?'var(--brand-gold)':'var(--text-secondary)', borderBottom:active===l?'1px solid var(--brand-gold)':'1px solid transparent' }}>{l}</a>)}</nav>
+      <div style={{ display:'flex', gap:12 }}><Button variant="secondary" size="sm">Log In</Button><Button variant="primary" size="sm">Get Started</Button></div>
+    </div>
+  </header>;
+}
+
+const TRUST=['Forbes','Entrepreneur','yahoo!finance','Business Insider','Benzinga'];
+function Hero(){
+  return <section style={{ position:'relative', overflow:'hidden' }}>
+    <div style={{ position:'absolute', top:'-10%', right:'-6%', width:700, height:700, background:'var(--gradient-gold-radial)', filter:'blur(20px)', animation:'nx-pulse-glow 7s var(--ease-standard) infinite', pointerEvents:'none' }}/>
+    <div className="container" style={{ position:'relative', display:'grid', gridTemplateColumns:'1.05fr .95fr', gap:40, alignItems:'center', padding:'80px 32px 88px' }}>
+      <div style={{ animation:'nx-fade-up .9s var(--ease-out) both' }}>
+        <div className="nx-eyebrow" style={{ marginBottom:20 }}>Where You Can Be Fully You</div>
+        <h1 style={{ fontSize:'clamp(40px,5vw,68px)', lineHeight:1.02, letterSpacing:'-.02em' }}>Create Your Manual.<br/>Share Understanding.<br/><span style={{ background:'var(--gradient-gold)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>Transform Relationships.</span></h1>
+        <p style={{ fontSize:18, lineHeight:1.6, color:'var(--text-secondary)', maxWidth:'46ch', margin:'24px 0 32px' }}>Tenderside helps you create a living manual that explains who you are, how you think, and what you need to thrive. Share it with the people who matter most.</p>
+        <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}><Button variant="primary" size="lg" iconRight={<Icon name="arrow-right" size={18}/>}>Create My Manual</Button><Button variant="secondary" size="lg" icon={<Icon name="play" size={16}/>}>Watch How It Works</Button></div>
+      </div>
+      <div style={{ position:'relative', display:'flex', justifyContent:'center', overflow:'visible' }}><img src="assets/imagery/hero-journal-sunset.png" alt="A gratitude journal and the Tenderside Human Manual on a warm desk at sunset" style={{ width:'122%', margin:'0 -11%', objectFit:'cover', WebkitMaskImage:'radial-gradient(ellipse 70% 68% at 50% 50%, #000 46%, transparent 88%)', maskImage:'radial-gradient(ellipse 70% 68% at 50% 50%, #000 46%, transparent 88%)', animation:'nx-float 6s var(--ease-standard) infinite' }}/></div>
+    </div>
+    <div className="container" style={{ position:'relative', paddingBottom:48 }}>
+      <div className="nx-caption" style={{ marginBottom:18 }}>Trusted by people building deeper connections</div>
+      <div style={{ display:'flex', gap:44, flexWrap:'wrap', alignItems:'center', opacity:.55 }}>{TRUST.map(n=><span key={n} style={{ fontFamily:'var(--font-display)', fontSize:22, fontStyle:'italic', color:'var(--text-secondary)' }}>{n}</span>)}</div>
+    </div>
+  </section>;
+}
+
+const VALS=[{icon:'manual',title:'Create Your Manual',body:'Answer guided questions to build your personal manual — your owner\u2019s guide.'},{icon:'share',title:'Share with Purpose',body:'Share your manual securely with the people who matter most.'},{icon:'blind-spots',title:'They Understand You',body:'They get a clear guide to who you are and how to support you better.'},{icon:'relationships',title:'Stronger Connections',body:'Less misunderstanding. More empathy. Deeper, more meaningful bonds.'}];
+function ValueGrid(){
+  return <section style={{ background:'var(--surface-1)', borderTop:'1px solid var(--border-subtle)', borderBottom:'1px solid var(--border-subtle)', padding:'72px 0' }}>
+    <div className="container">
+      <Reveal><h2 style={{ textAlign:'center', fontSize:'clamp(30px,3.6vw,40px)', marginBottom:6 }}>It&rsquo;s more than self-discovery.</h2><p style={{ textAlign:'center', fontFamily:'var(--font-display)', fontSize:30, fontStyle:'italic', color:'var(--brand-gold)', margin:'0 0 48px' }}>It&rsquo;s shared clarity.</p></Reveal>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))', gap:20 }}>{VALS.map((it,i)=><Reveal key={it.title} delay={i*90}><Card interactive style={{ display:'flex', flexDirection:'column', gap:14, height:'100%' }}><span style={{ width:46, height:46, borderRadius:'50%', border:'1px solid var(--border-strong)', display:'inline-flex', alignItems:'center', justifyContent:'center', color:'var(--brand-gold)' }}><Icon name={it.icon} size={22}/></span><div style={{ fontFamily:'var(--font-display)', fontSize:21 }}>{it.title}</div><p style={{ fontSize:14, lineHeight:1.5, color:'var(--text-secondary)', flex:1 }}>{it.body}</p><a href="#" style={{ fontSize:14, color:'var(--brand-gold)', display:'inline-flex', gap:6, alignItems:'center' }}>Learn more <Icon name="arrow-right" size={14}/></a></Card></Reveal>)}</div>
+    </div>
+  </section>;
+}
+
+const FEAT=[{icon:'privacy',t:'Private & Secure',b:'Your data is encrypted and always yours.'},{icon:'growth',t:'Living Document',b:'Your manual evolves as you grow.'},{icon:'insights',t:'AI-Powered Insights',b:'Science-backed insights personalized for you.'},{icon:'relationships',t:'Made to Share',b:'Share with partners, family, and teams.'}];
+const MROWS=[{t:'How I Think',b:'Core beliefs, patterns, and mindset.'},{t:'How I Communicate',b:'My communication style decoded.'},{t:'What Motivates Me',b:'My drives, values, and purpose.'},{t:'How To Support Me',b:'How to be my ally.'}];
+function ManualShowcase(){
+  return <section style={{ background:'var(--surface-ivory)', padding:'80px 0', color:'#0B0B0D' }}>
+    <div className="container" style={{ display:'grid', gridTemplateColumns:'1fr 1.1fr', gap:56, alignItems:'center' }}>
+      <Reveal><h2 style={{ fontSize:'clamp(30px,3.6vw,40px)', color:'var(--near-black)', lineHeight:1.1 }}>Your Manual. Your Story.<br/>Organized. Beautiful. <span style={{ color:'var(--gold-700)' }}>Always Evolving.</span></h2>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:28, marginTop:36 }}>{FEAT.map(f=><div key={f.t} style={{ display:'flex', gap:12 }}><span style={{ flexShrink:0 }}><Icon name={f.icon} size={22} color="#A8842A"/></span><div><div style={{ fontWeight:600, fontSize:15, color:'var(--near-black)' }}>{f.t}</div><div style={{ fontSize:13, color:'#5a564d', marginTop:2 }}>{f.b}</div></div></div>)}</div>
+      </Reveal>
+      <Reveal delay={120}><div style={{ background:'var(--near-black)', borderRadius:20, padding:24, boxShadow:'var(--shadow-lg)', border:'1px solid var(--border-subtle)' }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20 }}><div className="nx-caption">My Manual · v1.0 · Updated today</div><Button variant="secondary" size="sm" icon={<Icon name="share" size={14}/>}>Share</Button></div>
+        <div style={{ textAlign:'center', marginBottom:22 }}><div style={{ fontFamily:'var(--font-display)', fontSize:30, color:'var(--text-primary)' }}>Aracelis Sanchez</div><div className="nx-caption" style={{ marginTop:4 }}>The Human Manual</div></div>
+        <div style={{ display:'flex', flexDirection:'column', gap:10 }}>{MROWS.map(r=><div key={r.t} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'13px 16px', background:'var(--surface-2)', borderRadius:12, border:'1px solid var(--border-default)' }}><div><div style={{ fontSize:15, fontWeight:500, color:'var(--text-primary)' }}>{r.t}</div><div style={{ fontSize:12, color:'var(--text-tertiary)', marginTop:2 }}>{r.b}</div></div><Icon name="chevron-right" size={18} color="var(--brand-gold)"/></div>)}</div>
+      </div></Reveal>
+    </div>
+  </section>;
+}
+
+const MET=[['Communication',94],['Emotional Needs',91],['Values Alignment',89],['Life Vision',85]];
+function CompatBand(){
+  return <section style={{ padding:'80px 0' }}>
+    <div className="container" style={{ display:'grid', gridTemplateColumns:'.9fr 1.1fr', gap:56, alignItems:'center' }}>
+      <Reveal><Card variant="gold" glow style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:20, padding:36 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:14 }}><Avatar name="Aracelis" size={44}/><span style={{ fontFamily:'var(--font-display)', fontSize:20 }}>Aracelis &amp; Maurice</span><Avatar name="Maurice" size={44}/></div>
+        <ProgressRing value={88} size={150} sublabel="Strong connection"/>
+        <div style={{ width:'100%', display:'flex', flexDirection:'column', gap:12 }}>{MET.map(([l,v])=><ProgressBar key={l} label={l} value={v}/>)}</div>
+      </Card></Reveal>
+      <Reveal delay={120}><div className="nx-eyebrow" style={{ marginBottom:18 }}>For Relationships</div><h2 style={{ fontSize:'clamp(30px,3.6vw,40px)', lineHeight:1.1, marginBottom:20 }}>See how you align.<br/>Where you thrive. Where you grow.</h2><p style={{ fontSize:17, lineHeight:1.6, color:'var(--text-secondary)', maxWidth:'48ch', marginBottom:28 }}>Compare manuals to understand compatibility, strengths, and potential friction — then get recommended strategies to connect more deeply.</p><Button variant="primary" size="lg" iconRight={<Icon name="arrow-right" size={18}/>}>Compare Manuals</Button></Reveal>
+    </div>
+  </section>;
+}
+
+function ClosingCTA(){
+  return <section style={{ position:'relative', padding:'104px 0', textAlign:'center', overflow:'hidden', borderTop:'1px solid var(--border-subtle)' }}>
+    <div style={{ position:'absolute', inset:0, background:'var(--gradient-gold-radial)', opacity:.6 }}/>
+    <div className="container" style={{ position:'relative' }}><Reveal><h2 style={{ fontSize:'clamp(34px,4.4vw,52px)', lineHeight:1.05, margin:'0 auto', maxWidth:'18ch' }}>The deepest connections start with understanding yourself.</h2><div style={{ marginTop:34, display:'flex', justifyContent:'center' }}><Button variant="primary" size="lg" iconRight={<Icon name="arrow-right" size={18}/>}>Create My Manual</Button></div></Reveal></div>
+  </section>;
+}
+
+const FCOLS=[{h:'Product',links:['How It Works','The Manual','For Relationships','Pricing']},{h:'Company',links:['About','Science','Careers','Contact']},{h:'Legal',links:['Privacy','Terms','Security']}];
+function Footer(){
+  return <footer style={{ background:'var(--near-black)', borderTop:'1px solid var(--border-subtle)', padding:'56px 0 40px' }}>
+    <div className="container">
+      <div style={{ display:'grid', gridTemplateColumns:'1.6fr repeat(3,1fr)', gap:32, paddingBottom:40, borderBottom:'1px solid var(--divider)' }}>
+        <div><div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:14 }}><img src="assets/logos/tenderside-icon.png" alt="Tenderside" width="32" height="32" style={{ borderRadius:8, objectFit:'cover' }}/><span style={{ fontFamily:'var(--font-display)', fontSize:22, letterSpacing:'.14em' }}>TENDERSIDE</span></div><p style={{ fontFamily:'var(--font-display)', fontSize:18, fontStyle:'italic', color:'var(--text-secondary)', maxWidth:'30ch' }}>Understand yourself. Connect deeply. Live intentionally.</p></div>
+        {FCOLS.map(c=><div key={c.h}><div className="nx-caption" style={{ marginBottom:14 }}>{c.h}</div><ul style={{ listStyle:'none', margin:0, padding:0, display:'flex', flexDirection:'column', gap:10 }}>{c.links.map(l=><li key={l}><a href="#" style={{ fontSize:14, color:'var(--text-secondary)' }}>{l}</a></li>)}</ul></div>)}
+      </div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:24, flexWrap:'wrap', gap:12 }}><span className="nx-caption" style={{ color:'var(--text-tertiary)' }}>© 2024 Tenderside. All rights reserved.</span><span className="nx-caption" style={{ color:'var(--text-tertiary)' }}>The Human Manual</span></div>
+    </div>
+  </footer>;
+}
+
+function App(){ return <React.Fragment><Nav/><Hero/><ValueGrid/><ManualShowcase/><CompatBand/><ClosingCTA/><Footer/></React.Fragment>; }
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
