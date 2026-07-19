@@ -26,7 +26,20 @@ export function Hero() {
         <div className="animate-fade-up">
           <p className="nx-eyebrow">Where you can be fully you</p>
 
-          <h1 className="mt-5" style={{ fontSize: "clamp(40px, 5vw, 68px)", lineHeight: 1.02 }}>
+          {/*
+            Three deliberate lines. Sized so the longest ("The people who love
+            you", 23 chars) fits the ~575px left column at the clamp ceiling —
+            at 68px it wrapped to five ragged lines. `text-wrap: balance` is the
+            safety net if a translation or copy edit pushes a line over.
+          */}
+          <h1
+            className="mt-5"
+            style={{
+              fontSize: "clamp(36px, 4vw, 56px)",
+              lineHeight: 1.05,
+              textWrap: "balance",
+            }}
+          >
             The people who love you
             <br />
             are still guessing.
@@ -56,11 +69,12 @@ export function Hero() {
 
         <Reveal>
           <Image
-            src="/brand/hero-journal-sunset.png"
+            src="/brand/hero-journal-sunset.webp"
             alt="A journal open beside the Tenderside manual on a desk at sunset"
-            width={1536}
-            height={1024}
+            width={1400}
+            height={933}
             priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="h-auto w-[122%] max-w-none animate-float"
             style={{
               margin: "0 -11%",

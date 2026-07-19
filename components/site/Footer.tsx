@@ -41,10 +41,10 @@ export function Footer() {
         >
           <div>
             <Image
-              src="/brand/tenderside-horizontal.png"
+              src="/brand/tenderside-horizontal.webp"
               alt="Tenderside"
-              width={300}
-              height={200}
+              width={520}
+              height={99}
               className="h-[44px] w-auto"
             />
             <p

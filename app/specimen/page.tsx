@@ -84,10 +84,10 @@ export default function TokenSpecimen() {
       {/* ── Masthead ─────────────────────────────────────────────── */}
       <header className="pb-12">
         <Image
-          src="/brand/tenderside-horizontal.png"
+          src="/brand/tenderside-horizontal.webp"
           alt="Tenderside"
           width={520}
-          height={347}
+          height={99}
           priority
           className="h-auto w-[320px] max-w-full"
         />
@@ -254,10 +254,10 @@ export default function TokenSpecimen() {
         <div className="flex flex-wrap items-center gap-16 py-8">
           <div className="flex flex-col items-center gap-4">
             <Image
-              src="/brand/tenderside-logo.png"
+              src="/brand/tenderside-mark.webp"
               alt=""
-              width={120}
-              height={80}
+              width={320}
+              height={299}
               className="h-auto w-[120px] animate-float"
             />
             <span className="nx-caption">float 6s</span>

@@ -40,13 +40,19 @@ export function Nav() {
     >
       <nav className="container-nx flex h-full items-center gap-10">
         <Link href="/" className="flex shrink-0 items-center" aria-label="Tenderside home">
+          {/*
+            Dimensions are the artwork's true bounds. The source PNG was a
+            1536x1024 canvas whose wordmark occupied only 18% of the height, so
+            sizing by height rendered the mark at ~7px tall — invisible. The
+            asset is now trimmed to its content (see scripts/brand-assets.mjs).
+          */}
           <Image
-            src="/brand/tenderside-horizontal.png"
+            src="/brand/tenderside-horizontal.webp"
             alt="Tenderside"
-            width={300}
-            height={200}
+            width={520}
+            height={99}
             priority
-            className="h-[42px] w-auto"
+            className="h-[38px] w-auto"
           />
         </Link>
 
