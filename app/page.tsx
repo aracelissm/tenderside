@@ -1,6 +1,7 @@
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
 import { ValueGrid } from "@/components/site/ValueGrid";
+import { FounderNote } from "@/components/site/FounderNote";
 import { ManualShowcase } from "@/components/site/ManualShowcase";
 import { ShareMoment } from "@/components/site/ShareMoment";
 import { ClosingCTA } from "@/components/site/ClosingCTA";
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <ValueGrid />
+        <FounderNote />
         <ManualShowcase />
         <ShareMoment />
         <ClosingCTA />

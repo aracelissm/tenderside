@@ -27,76 +27,33 @@ export function Hero() {
           <p className="nx-eyebrow">Where you can be fully you</p>
 
           {/*
-            The hero reads as the founder speaking, not as marketing copy. For a
-            product that asks people to write down their most private material,
-            a named human saying why is a stronger opening than a brand voice.
+            Headline and body are the design prototype's copy, unchanged.
 
-            Semantics: the h1 stays an h1 inside the blockquote so the page keeps
-            a single real heading. The quote marks are decorative and hidden from
-            assistive tech; the attribution carries the meaning.
-
-            Sizing: the longest line ("The people who love you", 23 chars) fits
-            the ~575px column at the clamp ceiling. text-wrap:balance is the
-            safety net if the copy is edited.
+            Sizing: the ceiling is 52px rather than the prototype's 68px because
+            the longest line ("Transform Relationships.", 24 chars) does not fit
+            the ~575px left column above that — at 68px it wraps to a ragged
+            fourth line. text-wrap:balance is the safety net if the copy changes.
           */}
-          <blockquote className="relative mt-5">
-            <span
-              aria-hidden
-              className="absolute -left-6 -top-6 select-none leading-none"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "96px",
-                color: "var(--brand-gold)",
-                opacity: 0.28,
-              }}
-            >
-              &ldquo;
-            </span>
+          <h1
+            className="mt-5"
+            style={{
+              fontSize: "clamp(34px, 3.8vw, 52px)",
+              lineHeight: 1.05,
+              textWrap: "balance",
+            }}
+          >
+            Create Your Manual.
+            <br />
+            Share Understanding.
+            <br />
+            <span className="nx-gold-text">Transform Relationships.</span>
+          </h1>
 
-            <h1
-              style={{
-                fontSize: "clamp(36px, 4vw, 56px)",
-                lineHeight: 1.05,
-                textWrap: "balance",
-              }}
-            >
-              The people who love you
-              <br />
-              are still guessing.
-              <br />
-              <span className="nx-gold-text">Hand them the manual.</span>
-            </h1>
-
-            <p
-              className="nx-body mt-6 text-[18px] leading-relaxed"
-              style={{ maxWidth: "46ch" }}
-            >
-              Tenderside walks you through nine honest conversations, then writes
-              them into something your partner can actually read — how you
-              communicate, what you need when you&rsquo;re overwhelmed, and the
-              things you&rsquo;ve never quite found the words for.
-            </p>
-
-            <footer className="mt-6 flex items-center gap-3">
-              <span
-                aria-hidden
-                className="block h-px w-8"
-                style={{ background: "var(--border-strong)" }}
-              />
-              <cite
-                className="not-italic"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "var(--fs-caption)",
-                  letterSpacing: "var(--track-caption)",
-                  textTransform: "uppercase",
-                  color: "var(--text-tertiary)",
-                }}
-              >
-                Aracelis Sanchez · Founder
-              </cite>
-            </footer>
-          </blockquote>
+          <p className="nx-body mt-6 text-[18px] leading-relaxed" style={{ maxWidth: "46ch" }}>
+            Tenderside helps you create a living manual that explains who you
+            are, how you think, and what you need to thrive. Share it with the
+            people who matter most.
+          </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button href="#start">
