@@ -40,13 +40,27 @@ export function Footer() {
           style={{ borderColor: "var(--divider)" }}
         >
           <div>
-            <Image
-              src="/brand/tenderside-horizontal.webp"
-              alt="Tenderside"
-              width={520}
-              height={99}
-              className="h-[44px] w-auto"
-            />
+            {/* Symbol + live-text wordmark, same reasoning as Nav. */}
+            <div className="flex items-center gap-3">
+              <Image
+                src="/brand/tenderside-mark.webp"
+                alt=""
+                width={320}
+                height={299}
+                className="h-[36px] w-auto"
+              />
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "26px",
+                  letterSpacing: "0.14em",
+                  color: "var(--brand-gold)",
+                  lineHeight: 1,
+                }}
+              >
+                TENDERSIDE
+              </span>
+            </div>
             <p
               className="mt-4 italic"
               style={{

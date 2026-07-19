@@ -39,21 +39,39 @@ export function Nav() {
       }}
     >
       <nav className="container-nx flex h-full items-center gap-10">
-        <Link href="/" className="flex shrink-0 items-center" aria-label="Tenderside home">
-          {/*
-            Dimensions are the artwork's true bounds. The source PNG was a
-            1536x1024 canvas whose wordmark occupied only 18% of the height, so
-            sizing by height rendered the mark at ~7px tall — invisible. The
-            asset is now trimmed to its content (see scripts/brand-assets.mjs).
-          */}
+        {/*
+          Symbol as image + wordmark as live text, matching the design prototype
+          (34x34 icon + "TENDERSIDE" in the display serif at 0.14em tracking).
+
+          The full raster lockup was used here first and read blurry: its tagline
+          is ~8px tall in the source artwork, so at nav size it renders under 2px.
+          No amount of resolution fixes rasterised micro-type — the fix is to set
+          it as real text, which stays crisp at any size and zoom.
+        */}
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-3"
+          aria-label="Tenderside home"
+        >
           <Image
-            src="/brand/tenderside-horizontal.webp"
-            alt="Tenderside"
-            width={520}
-            height={99}
+            src="/brand/tenderside-mark.webp"
+            alt=""
+            width={320}
+            height={299}
             priority
-            className="h-[38px] w-auto"
+            className="h-[34px] w-auto"
           />
+          <span
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "24px",
+              letterSpacing: "0.14em",
+              color: "var(--brand-gold)",
+              lineHeight: 1,
+            }}
+          >
+            TENDERSIDE
+          </span>
         </Link>
 
         <ul className="hidden flex-1 items-center gap-8 md:flex">
