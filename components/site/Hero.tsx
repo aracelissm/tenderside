@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -27,32 +27,76 @@ export function Hero() {
           <p className="nx-eyebrow">Where you can be fully you</p>
 
           {/*
-            Three deliberate lines. Sized so the longest ("The people who love
-            you", 23 chars) fits the ~575px left column at the clamp ceiling —
-            at 68px it wrapped to five ragged lines. `text-wrap: balance` is the
-            safety net if a translation or copy edit pushes a line over.
-          */}
-          <h1
-            className="mt-5"
-            style={{
-              fontSize: "clamp(36px, 4vw, 56px)",
-              lineHeight: 1.05,
-              textWrap: "balance",
-            }}
-          >
-            The people who love you
-            <br />
-            are still guessing.
-            <br />
-            <span className="nx-gold-text">Hand them the manual.</span>
-          </h1>
+            The hero reads as the founder speaking, not as marketing copy. For a
+            product that asks people to write down their most private material,
+            a named human saying why is a stronger opening than a brand voice.
 
-          <p className="nx-body mt-6 text-[18px] leading-relaxed" style={{ maxWidth: "46ch" }}>
-            Tenderside walks you through nine honest conversations, then writes
-            them into something your partner can actually read — how you
-            communicate, what you need when you&rsquo;re overwhelmed, and the
-            things you&rsquo;ve never quite found the words for.
-          </p>
+            Semantics: the h1 stays an h1 inside the blockquote so the page keeps
+            a single real heading. The quote marks are decorative and hidden from
+            assistive tech; the attribution carries the meaning.
+
+            Sizing: the longest line ("The people who love you", 23 chars) fits
+            the ~575px column at the clamp ceiling. text-wrap:balance is the
+            safety net if the copy is edited.
+          */}
+          <blockquote className="relative mt-5">
+            <span
+              aria-hidden
+              className="absolute -left-6 -top-6 select-none leading-none"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "96px",
+                color: "var(--brand-gold)",
+                opacity: 0.28,
+              }}
+            >
+              &ldquo;
+            </span>
+
+            <h1
+              style={{
+                fontSize: "clamp(36px, 4vw, 56px)",
+                lineHeight: 1.05,
+                textWrap: "balance",
+              }}
+            >
+              The people who love you
+              <br />
+              are still guessing.
+              <br />
+              <span className="nx-gold-text">Hand them the manual.</span>
+            </h1>
+
+            <p
+              className="nx-body mt-6 text-[18px] leading-relaxed"
+              style={{ maxWidth: "46ch" }}
+            >
+              Tenderside walks you through nine honest conversations, then writes
+              them into something your partner can actually read — how you
+              communicate, what you need when you&rsquo;re overwhelmed, and the
+              things you&rsquo;ve never quite found the words for.
+            </p>
+
+            <footer className="mt-6 flex items-center gap-3">
+              <span
+                aria-hidden
+                className="block h-px w-8"
+                style={{ background: "var(--border-strong)" }}
+              />
+              <cite
+                className="not-italic"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "var(--fs-caption)",
+                  letterSpacing: "var(--track-caption)",
+                  textTransform: "uppercase",
+                  color: "var(--text-tertiary)",
+                }}
+              >
+                Aracelis Sanchez · Founder
+              </cite>
+            </footer>
+          </blockquote>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button href="#start">
@@ -60,7 +104,8 @@ export function Hero() {
               <ArrowRight size={18} strokeWidth={1.75} />
             </Button>
             <Button href="#how-it-works" variant="secondary">
-              See what&rsquo;s inside
+              <Play size={16} strokeWidth={1.75} />
+              Watch How It Works
             </Button>
           </div>
 
