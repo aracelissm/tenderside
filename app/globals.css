@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════
+   Tenderside Design Tokens
+   Ported verbatim from docs/design-system/tokens/*.css — the design
+   system is authoritative (CLAUDE.md §11). Do not re-derive these
+   values; if a value needs to change, change it in the design system
+   first and re-port it here.
+
+   Font families are the one intentional deviation: the source uses an
+   @import from Google Fonts, we use next/font/google in layout.tsx so
+   the files are self-hosted and don't render-block. Values identical.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Primary palette ─────────────────────────────────────────── */
+  --near-black:     #0B0B0D;   /* Deep Onyx — foundation, depth, focus     */
+  --charcoal:       #141414;   /* Charcoal  — raised warmth on the onyx    */
+  --antique-gold:   #D4AF37;   /* Gold — signature: warmth, worth, glow    */
+  --light-gold:     #E7C97A;   /* Light Gold — highlights, hover, sheen    */
+  --warm-champagne: #F1E4C6;   /* Warm Champagne — soft luminous neutral   */
+  --warm-ivory:     #F1E4C6;   /* alias — light document / Manual surface  */
+
+  /* ── Neutral scale (dark → light, warm-leaning) ──────────────── */
+  --neutral-950: #0B0B0D;
+  --neutral-900: #141414;
+  --neutral-800: #1C1C1E;
+  --neutral-700: #262626;
+  --neutral-600: #3C3A36;
+  --neutral-400: #8C8577;
+  --neutral-200: #DAD5CA;
+
+  /* ── Gold ramp ───────────────────────────────────────────────── */
+  --gold-100: #F1E4C6;
+  --gold-300: #E7C97A;
+  --gold-500: #D4AF37;
+  --gold-700: #A8842A;
+  --gold-900: #6E561A;
+
+  /* ── Champagne / ivory ramp ──────────────────────────────────── */
+  --ivory-050: #FBF7EC;
+  --ivory-100: #F1E4C6;
+  --ivory-200: #E6D6B4;
+  --ivory-300: #D6C298;
+
+  /* ── Accent palette (categorical) ────────────────────────────── */
+  --accent-teal:       #3E9E86;
+  --accent-green:      #2F7A68;
+  --accent-blue:       #5B8FB8;
+  --accent-violet:     #9B7BC4;
+  --accent-terracotta: #C98A5C;
+  --accent-blush:      #CFA8A0;
+
+  /* ── Semantic — surfaces ─────────────────────────────────────── */
+  --bg-page:       var(--near-black);
+  --surface-1:     #141414;
+  --surface-2:     #1C1C1E;
+  --surface-3:     #262626;
+  --surface-ivory: var(--warm-champagne);
+
+  /* ── Semantic — text ─────────────────────────────────────────── */
+  --text-primary:   #F5EFE2;
+  --text-secondary: #B8B2A6;
+  --text-tertiary:  #8C8577;
+  --text-on-gold:   #0B0B0D;
+  --text-on-ivory:  #0B0B0D;
+  --text-inverse:   #0B0B0D;
+
+  /* ── Semantic — brand & interactive ──────────────────────────── */
+  --brand-gold:      var(--antique-gold);
+  --brand-champagne: var(--warm-champagne);
+  --link:            var(--gold-300);
+  --link-hover:      var(--gold-100);
+
+  /* ── Semantic — borders & dividers ───────────────────────────── */
+  --border-subtle:  rgba(212, 175, 55, 0.18);
+  --border-default: rgba(245, 239, 226, 0.10);
+  --border-strong:  rgba(212, 175, 55, 0.45);
+  --divider:        rgba(245, 239, 226, 0.08);
+
+  /* ── Semantic — status ───────────────────────────────────────── */
+  --status-positive:     #3E9E86;
+  --status-positive-bg:  rgba(62, 158, 134, 0.14);
+  --status-attention:    #D4AF37;
+  --status-attention-bg: rgba(212, 175, 55, 0.14);
+  --status-caution:      #C98A5C;
+  --status-caution-bg:   rgba(201, 138, 92, 0.14);
+  --status-info:         #5B8FB8;
+  --status-info-bg:      rgba(91, 143, 184, 0.14);
+
+  /* ── Typography — families (wired to next/font in layout.tsx) ── */
+  --font-display: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-body:    var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ── Typography — weights ────────────────────────────────────── */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* ── Typography — scale ──────────────────────────────────────── */
+  --fs-display: 5.25rem;  --lh-display: 1.02;
+  --fs-h1:      4.5rem;   --lh-h1:      1.05;
+  --fs-h2:      2.5rem;   --lh-h2:      1.2;
+  --fs-h3:      1.5rem;   --lh-h3:      1.33;
+  --fs-body-lg: 1.125rem; --lh-body-lg: 1.6;
+  --fs-body:    1rem;     --lh-body:    1.5;
+  --fs-small:   0.875rem; --lh-small:   1.43;
+  --fs-caption: 0.75rem;  --lh-caption: 1.33;
+
+  /* ── Typography — tracking ───────────────────────────────────── */
+  --track-display: -0.02em;
+  --track-tight:   -0.01em;
+  --track-normal:  0;
+  --track-caption: 0.05em;
+  --track-eyebrow: 0.22em;
+
+  /* ── Spacing (base unit 8px) ─────────────────────────────────── */
+  --unit: 8px;
+  --space-0:  0;     --space-1:  4px;  --space-2:  8px;
+  --space-3:  12px;  --space-4:  16px; --space-5:  24px;
+  --space-6:  32px;  --space-7:  48px; --space-8:  64px;
+  --space-9:  96px;  --space-10: 128px;
+
+  /* ── Layout ──────────────────────────────────────────────────── */
+  --grid-columns:    12;
+  --grid-gutter:     24px;
+  --margin-inline:   32px;
+  --margin-block:    24px;
+  --container-max:   1200px;
+  --container-prose: 68ch;
+
+  /* ── Radii ───────────────────────────────────────────────────── */
+  --radius-xs: 4px;  --radius-sm: 8px;   --radius-md:  12px;
+  --radius-lg: 16px; --radius-xl: 24px;  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  /* ── Control sizing ──────────────────────────────────────────── */
+  --control-h-sm: 36px;
+  --control-h-md: 44px;   /* default — meets 44px touch target */
+  --control-h-lg: 52px;
+
+  /* ── Elevation ───────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.6);
+  --shadow-ivory: 0 12px 40px rgba(11, 11, 13, 0.12);
+
+  /* ── Gold glow — signature accent ────────────────────────────── */
+  --glow-gold-sm: 0 0 16px rgba(212, 175, 55, 0.25);
+  --glow-gold:    0 0 40px rgba(212, 175, 55, 0.30);
+  --glow-gold-lg: 0 0 80px rgba(212, 175, 55, 0.34);
+  --glow-teal:    0 0 40px rgba(62, 158, 134, 0.32);
+  --glow-green:   0 0 40px rgba(62, 158, 134, 0.32);
+
+  /* ── Gradients (use sparingly) ───────────────────────────────── */
+  --gradient-gold: linear-gradient(135deg, #F1E4C6 0%, #D4AF37 45%, #A8842A 100%);
+  --gradient-gold-radial: radial-gradient(120% 120% at 50% 0%, rgba(212,175,55,0.38) 0%, rgba(212,175,55,0) 60%);
+  --gradient-champagne: linear-gradient(135deg, #F1E4C6 0%, #E7C97A 100%);
+  --gradient-green: linear-gradient(135deg, #3E9E86 0%, #2F7A68 100%);
+  --gradient-ink: linear-gradient(180deg, #141414 0%, #0B0B0D 100%);
+  --gradient-scrim: linear-gradient(180deg, rgba(11,11,13,0) 0%, rgba(11,11,13,0.85) 100%);
+  --texture-grain: radial-gradient(rgba(212,175,55,0.05) 1px, transparent 1px);
+
+  /* ── Focus ring ──────────────────────────────────────────────── */
+  --focus-ring: 0 0 0 3px rgba(212, 175, 55, 0.45);
+
+  /* ── Motion — calm, refined, never bouncy ────────────────────── */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: var(--fw-regular);
+    margin: 0;
+    color: var(--text-primary);
+  }
+  h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: var(--track-tight); }
+  h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: var(--fw-medium); }
+  h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: var(--fw-medium); }
+
+  /* Gold focus ring everywhere — accessibility is not a Phase 4 nicety */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-xs);
+  }
+}
+
+/* ── Utilities (from the design system) ────────────────────────── */
+@layer components {
+  .container-nx {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--margin-inline);
+  }
+
+  .nx-display {
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--track-display);
+    font-weight: var(--fw-regular);
+  }
+
+  .nx-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-caption);
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--brand-gold);
+    font-weight: var(--fw-medium);
+  }
+
+  .nx-caption {
+    font-family: var(--font-mono);
+    font-size: var(--fs-caption);
+    line-height: var(--lh-caption);
+    letter-spacing: var(--track-caption);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .nx-body {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--text-secondary);
+  }
+
+  /* Gold gradient clipped to text — used on the hero's third line */
+  .nx-gold-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* ── Motion keyframes ──────────────────────────────────────────── */
+@keyframes nx-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+@keyframes nx-pulse-glow {
+  0%, 100% { opacity: 0.5;  transform: scale(1); }
+  50%      { opacity: 0.85; transform: scale(1.06); }
+}
+
+@keyframes nx-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion: show final state, no animation (design system requirement) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
