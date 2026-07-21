@@ -56,7 +56,7 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href="#start">
+            <Button href="/begin">
               Create My Manual
               <ArrowRight size={18} strokeWidth={1.75} />
             </Button>

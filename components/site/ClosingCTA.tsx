@@ -21,7 +21,7 @@ export function ClosingCTA() {
           They want to get this right. Give them something to work with.
         </h2>
         <div className="mt-10 flex justify-center">
-          <Button href="#start">
+          <Button href="/begin">
             Create My Manual
             <ArrowRight size={18} strokeWidth={1.75} />
           </Button>

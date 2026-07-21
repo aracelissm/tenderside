@@ -106,7 +106,7 @@ export function Nav() {
           <Button href="/login" variant="secondary" size="sm">
             Log In
           </Button>
-          <Button href="#start" size="sm">
+          <Button href="/begin" size="sm">
             Get Started
           </Button>
         </div>

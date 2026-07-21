@@ -85,7 +85,7 @@ export function ShareMoment() {
             we&rsquo;ve worked hardest on.
           </p>
           <div className="mt-8">
-            <Button href="#start">Create My Manual</Button>
+            <Button href="/begin">Create My Manual</Button>
           </div>
         </Reveal>
       </div>
